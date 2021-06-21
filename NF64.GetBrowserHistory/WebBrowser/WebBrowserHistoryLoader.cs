@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NF64.WebBrowser
 {
-    internal sealed class WebBrowserHistoryLoader
+    public sealed class WebBrowserHistoryLoader
     {
         public string TemporaryDirectoryPath { get; }
 
