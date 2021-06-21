@@ -4,7 +4,7 @@ using System.Data.SQLite;
 
 namespace NF64.WebBrowser.Provider
 {
-    public abstract class ChromiumHistoryProvider : SQLiteWebBrowserHistoryProvider
+    public abstract class ChromiumHistoryProvider : WebBrowserSQLiteHistoryProvider
     {
         public ChromiumHistoryProvider(string browserName, string historyFilePath) : base(browserName, historyFilePath) { }
 

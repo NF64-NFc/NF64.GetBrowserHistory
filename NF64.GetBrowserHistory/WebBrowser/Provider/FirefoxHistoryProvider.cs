@@ -4,7 +4,7 @@ using System.Data.SQLite;
 
 namespace NF64.WebBrowser.Provider
 {
-    public sealed class FirefoxHistoryProvider : SQLiteWebBrowserHistoryProvider
+    public sealed class FirefoxHistoryProvider : WebBrowserSQLiteHistoryProvider
     {
         public FirefoxHistoryProvider(string historyFilePath) : base("Firefox", historyFilePath) { }
 

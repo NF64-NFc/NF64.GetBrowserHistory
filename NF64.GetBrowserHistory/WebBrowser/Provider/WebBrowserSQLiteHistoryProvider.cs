@@ -6,14 +6,14 @@ using System.IO;
 
 namespace NF64.WebBrowser.Provider
 {
-    public abstract class SQLiteWebBrowserHistoryProvider : IWebBrowserHistoryProvider, IWebBrowserHistoryPath
+    public abstract class WebBrowserSQLiteHistoryProvider : IWebBrowserHistoryProvider, IWebBrowserHistoryPath
     {
         public string BrowserName { get; }
 
         public string HistoryFilePath { get; }
 
 
-        protected SQLiteWebBrowserHistoryProvider(string browserName, string historyFilePath)
+        protected WebBrowserSQLiteHistoryProvider(string browserName, string historyFilePath)
         {
             if (string.IsNullOrEmpty(browserName))
                 throw new ArgumentException($"{browserName} is null or empty", nameof(browserName));

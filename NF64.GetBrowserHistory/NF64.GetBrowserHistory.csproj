@@ -49,7 +49,7 @@
     <Compile Include="WebBrowser\WebBrowserHistoryPath.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebBrowser\Provider\SQLiteWebBrowserHistoryProvider.cs" />
+    <Compile Include="WebBrowser\Provider\WebBrowserSQLiteHistoryProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
