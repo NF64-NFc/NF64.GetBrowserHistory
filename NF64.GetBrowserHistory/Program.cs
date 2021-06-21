@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using NF64.WebBrowser;
 using NF64.WebBrowser.Provider;
@@ -15,9 +14,10 @@ namespace NF64
         {
             var providers = new IWebBrowserHistoryProvider[] {
                     new IEHistoryProvider(),
-                    new ChromiumEdgeHistoryProvider(WebBrowserHistoryPath.ChromiumEdgePath),
-                    new ChromeHistoryProvider(WebBrowserHistoryPath.GoogleChromePath),
-                }.Concat(GetFireFoxProviders());
+                    WebBrowserHistoryProviderHelper.CreateChromiumEdgeHistoryProvider(),
+                    WebBrowserHistoryProviderHelper.CreateChromeHistoryProvider(),
+                    null
+                }.Concat(WebBrowserHistoryProviderHelper.CreateFirefoxHistoryProviders());
 
             var loader = new WebBrowserHistoryLoader(TempDirectoryPath, providers);
             var histories = loader.Load();
@@ -26,16 +26,6 @@ namespace NF64
                 Console.WriteLine(history);
 
             return;
-        }
-
-
-        private static IEnumerable<IWebBrowserHistoryProvider> GetFireFoxProviders()
-        {
-            var paths = WebBrowserHistoryPath.GetFirefoxHistoryFilePath();
-            var ret = new List<FirefoxHistoryProvider>();
-            foreach (var path in paths)
-                ret.Add(new FirefoxHistoryProvider(path));
-            return ret;
         }
     }
 }

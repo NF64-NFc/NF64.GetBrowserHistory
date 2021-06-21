@@ -30,7 +30,9 @@ namespace NF64.WebBrowser
         {
             try
             {
-                var tasks = this.Providers.Select(
+                var tasks = this.Providers
+                    .Where(provider => provider != null)
+                    .Select(
                         provider => Task.Run(() => this.LoadHistory(provider))
                     ).ToArray();
                 Task.WaitAll(tasks, this.TimeoutMilliseconds);

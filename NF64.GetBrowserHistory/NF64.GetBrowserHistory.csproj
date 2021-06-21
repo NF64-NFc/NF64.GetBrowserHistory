@@ -43,6 +43,7 @@
     <Compile Include="WebBrowser\Provider\IEHistoryProvider.cs" />
     <Compile Include="WebBrowser\Provider\IWebBrowserHistoryPath.cs" />
     <Compile Include="WebBrowser\Provider\IWebBrowserHistoryProvider.cs" />
+    <Compile Include="WebBrowser\WebBrowserHistoryProviderHelper.cs" />
     <Compile Include="WebBrowser\WebBrowserHistory.cs" />
     <Compile Include="WebBrowser\WebBrowserHistoryLoader.cs" />
     <Compile Include="WebBrowser\WebBrowserHistoryPath.cs" />
