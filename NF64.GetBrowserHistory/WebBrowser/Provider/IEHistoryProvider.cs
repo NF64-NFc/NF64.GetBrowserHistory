@@ -6,6 +6,15 @@ namespace NF64.WebBrowser.Provider
 {
     public sealed class IEHistoryProvider : IWebBrowserHistoryProvider
     {
+        public string BrowserName { get; }
+
+
+        public IEHistoryProvider()
+        {
+            this.BrowserName = "Internet Explorer";
+        }
+
+
         public IEnumerable<WebBrowserHistory> GetHistories()
         {
             var ret = new List<WebBrowserHistory>();
@@ -24,7 +33,8 @@ namespace NF64.WebBrowser.Provider
             => new WebBrowserHistory() {
                 Url = enumerator.Current.URL,
                 Title = enumerator.Current.Title,
-                VisitedTime = this.IETimeToLocalTime(enumerator)
+                VisitedTime = this.IETimeToLocalTime(enumerator),
+                BrowserName = this.BrowserName,
             };
 
 

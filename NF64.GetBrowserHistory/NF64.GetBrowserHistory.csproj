@@ -36,6 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="WebBrowser\Provider\ChromeHistoryProvider.cs" />
+    <Compile Include="WebBrowser\Provider\ChromiumEdgeHistoryProvider.cs" />
     <Compile Include="WebBrowser\Provider\ChromiumHistoryProvider.cs" />
     <Compile Include="WebBrowser\Provider\FirefoxHistoryProvider.cs" />
     <Compile Include="WebBrowser\Provider\IEHistoryProvider.cs" />

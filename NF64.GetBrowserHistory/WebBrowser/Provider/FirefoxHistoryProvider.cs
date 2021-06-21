@@ -6,7 +6,7 @@ namespace NF64.WebBrowser.Provider
 {
     public sealed class FirefoxHistoryProvider : SQLiteWebBrowserHistoryProvider
     {
-        public FirefoxHistoryProvider(string historyFilePath) : base(historyFilePath) { }
+        public FirefoxHistoryProvider(string historyFilePath) : base("Firefox", historyFilePath) { }
 
 
         protected override WebBrowserHistory GetHistoryItem(DataRow historyRow)
@@ -14,6 +14,7 @@ namespace NF64.WebBrowser.Provider
                     Url = Convert.ToString(historyRow["url"]),
                     Title = Convert.ToString(historyRow["title"]),
                     VisitedTime = this.UnixTimeToLocalTime(historyRow),
+                    BrowserName = this.BrowserName,
                 };
 
         protected override SQLiteConnection CreateConnection(string hisotryFilePath)

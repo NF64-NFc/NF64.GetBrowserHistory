@@ -15,8 +15,8 @@ namespace NF64
         {
             var providers = new IWebBrowserHistoryProvider[] {
                     new IEHistoryProvider(),
-                    new ChromiumHistoryProvider(WebBrowserHistoryPath.ChromiumEdgePath),
-                    new ChromiumHistoryProvider(WebBrowserHistoryPath.GoogleChromePath),
+                    new ChromiumEdgeHistoryProvider(WebBrowserHistoryPath.ChromiumEdgePath),
+                    new ChromeHistoryProvider(WebBrowserHistoryPath.GoogleChromePath),
                 }.Concat(GetFireFoxProviders());
 
             var loader = new WebBrowserHistoryLoader(TempDirectoryPath, providers);

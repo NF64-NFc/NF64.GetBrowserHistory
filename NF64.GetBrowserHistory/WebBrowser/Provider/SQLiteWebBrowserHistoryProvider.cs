@@ -8,11 +8,17 @@ namespace NF64.WebBrowser.Provider
 {
     public abstract class SQLiteWebBrowserHistoryProvider : IWebBrowserHistoryProvider, IWebBrowserHistoryPath
     {
+        public string BrowserName { get; }
+
         public string HistoryFilePath { get; }
 
 
-        protected SQLiteWebBrowserHistoryProvider(string historyFilePath)
+        protected SQLiteWebBrowserHistoryProvider(string browserName, string historyFilePath)
         {
+            if (string.IsNullOrEmpty(browserName))
+                throw new ArgumentException($"{browserName} is null or empty", nameof(browserName));
+            this.BrowserName = browserName;
+
             if (string.IsNullOrEmpty(historyFilePath))
                 throw new ArgumentException($"{historyFilePath} is null or empty", nameof(historyFilePath));
             this.HistoryFilePath = historyFilePath;

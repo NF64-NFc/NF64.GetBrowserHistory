@@ -4,16 +4,17 @@ using System.Data.SQLite;
 
 namespace NF64.WebBrowser.Provider
 {
-    public sealed class ChromiumHistoryProvider : SQLiteWebBrowserHistoryProvider
+    public abstract class ChromiumHistoryProvider : SQLiteWebBrowserHistoryProvider
     {
-        public ChromiumHistoryProvider(string historyFilePath) : base(historyFilePath) { }
+        public ChromiumHistoryProvider(string browserName, string historyFilePath) : base(browserName, historyFilePath) { }
 
 
         protected override WebBrowserHistory GetHistoryItem(DataRow historyRow)
             => new WebBrowserHistory() {
                 Url = Convert.ToString(historyRow["url"]),
                 Title = Convert.ToString(historyRow["title"]),
-                VisitedTime = this.UtcTimeToLocalTime(historyRow)
+                VisitedTime = this.UtcTimeToLocalTime(historyRow),
+                BrowserName = this.BrowserName,
             };
 
         protected override SQLiteConnection CreateConnection(string hisotryFilePath)
