@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="WebBrowser\Provider\ChromiumHistoryProvider.cs" />
     <Compile Include="WebBrowser\Provider\FirefoxHistoryProvider.cs" />
+    <Compile Include="WebBrowser\Provider\IEHistoryProvider.cs" />
     <Compile Include="WebBrowser\Provider\IWebBrowserHistoryPath.cs" />
     <Compile Include="WebBrowser\Provider\IWebBrowserHistoryProvider.cs" />
     <Compile Include="WebBrowser\WebBrowserHistory.cs" />
@@ -71,6 +72,13 @@
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.114.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="UrlHistoryLibrary, Version=1.0.7475.19319, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\UrlHistoryLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Lib\UrlHistoryLibrary.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

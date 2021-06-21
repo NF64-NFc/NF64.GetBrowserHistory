@@ -58,8 +58,11 @@ namespace NF64.WebBrowser
             string copiedHistoryFilePath = null;
             try
             {
-                copiedHistoryFilePath = this.CopyHistoryFile(historyPath);
-                historyPath.InjectedHistoryFilePath = copiedHistoryFilePath;
+                if (historyPath != null)
+                {
+                    copiedHistoryFilePath = this.CopyHistoryFile(historyPath);
+                    historyPath.InjectedHistoryFilePath = copiedHistoryFilePath;
+                }
 
                 var histories = provider.GetHistories();
                 if (histories?.Any() == true)
@@ -67,7 +70,8 @@ namespace NF64.WebBrowser
             }
             finally
             {
-                historyPath.InjectedHistoryFilePath = null;
+                if (historyPath != null)
+                    historyPath.InjectedHistoryFilePath = null;
 
                 if (copiedHistoryFilePath != null)
                 {
