@@ -11,13 +11,13 @@ namespace NF64.WebBrowser
     {
         public string TemporaryDirectoryPath { get; }
 
-        public IEnumerable<WebBrowserHistoryProvider> Providers { get; }
+        public IEnumerable<IWebBrowserHistoryProvider> Providers { get; }
 
 
         public int TimeoutMilliseconds { get; set; } = -1;
 
 
-        public WebBrowserHistoryLoader(string temporaryDirectoryPath, IEnumerable<WebBrowserHistoryProvider> providers)
+        public WebBrowserHistoryLoader(string temporaryDirectoryPath, IEnumerable<IWebBrowserHistoryProvider> providers)
         {
             if (string.IsNullOrEmpty(temporaryDirectoryPath))
                 throw new ArgumentException($"{temporaryDirectoryPath} is null or empty", nameof(temporaryDirectoryPath));
@@ -50,16 +50,16 @@ namespace NF64.WebBrowser
             }
         }
 
-        private IEnumerable<WebBrowserHistory> LoadHistory(WebBrowserHistoryProvider provider)
+        private IEnumerable<WebBrowserHistory> LoadHistory(IWebBrowserHistoryProvider provider)
         {
             var ret = new List<WebBrowserHistory>();
 
-            var injectableProvider = provider as IWebBrowserHistoryPathInjectable;
+            var historyPath = provider as IWebBrowserHistoryPath;
             string copiedHistoryFilePath = null;
             try
             {
-                copiedHistoryFilePath = this.CopyHistoryFile(provider);
-                injectableProvider.InjectedHistoryFilePath = copiedHistoryFilePath;
+                copiedHistoryFilePath = this.CopyHistoryFile(historyPath);
+                historyPath.InjectedHistoryFilePath = copiedHistoryFilePath;
 
                 var histories = provider.GetHistories();
                 if (histories?.Any() == true)
@@ -67,7 +67,7 @@ namespace NF64.WebBrowser
             }
             finally
             {
-                injectableProvider.InjectedHistoryFilePath = null;
+                historyPath.InjectedHistoryFilePath = null;
 
                 if (copiedHistoryFilePath != null)
                 {
@@ -79,11 +79,11 @@ namespace NF64.WebBrowser
             return ret;
         }
 
-        private string CopyHistoryFile(WebBrowserHistoryProvider provider)
+        private string CopyHistoryFile(IWebBrowserHistoryPath historyPath)
         {
             this.EnsureDirectory(this.TemporaryDirectoryPath);
 
-            var sourceFilePath = provider.HistoryFilePath;
+            var sourceFilePath = historyPath.HistoryFilePath;
             if (!File.Exists(sourceFilePath))
                 throw new FileNotFoundException("file not found.", sourceFilePath);
 

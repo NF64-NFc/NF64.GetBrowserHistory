@@ -38,13 +38,14 @@
   <ItemGroup>
     <Compile Include="WebBrowser\Provider\ChromiumHistoryProvider.cs" />
     <Compile Include="WebBrowser\Provider\FirefoxHistoryProvider.cs" />
-    <Compile Include="WebBrowser\IWebBrowserHistoryPathInjectable.cs" />
+    <Compile Include="WebBrowser\Provider\IWebBrowserHistoryPath.cs" />
+    <Compile Include="WebBrowser\Provider\IWebBrowserHistoryProvider.cs" />
     <Compile Include="WebBrowser\WebBrowserHistory.cs" />
     <Compile Include="WebBrowser\WebBrowserHistoryLoader.cs" />
     <Compile Include="WebBrowser\WebBrowserHistoryPath.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebBrowser\Provider\WebBrowserHistoryProvider.cs" />
+    <Compile Include="WebBrowser\Provider\SQLiteWebBrowserHistoryProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

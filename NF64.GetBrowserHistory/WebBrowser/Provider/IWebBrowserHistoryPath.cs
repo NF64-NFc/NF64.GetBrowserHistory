@@ -1,6 +1,6 @@
-﻿namespace NF64.WebBrowser
+﻿namespace NF64.WebBrowser.Provider
 {
-    internal interface IWebBrowserHistoryPathInjectable
+    internal interface IWebBrowserHistoryPath
     {
         string HistoryFilePath { get; }
 

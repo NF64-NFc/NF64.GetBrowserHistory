@@ -6,12 +6,12 @@ using System.IO;
 
 namespace NF64.WebBrowser.Provider
 {
-    public abstract class WebBrowserHistoryProvider : IWebBrowserHistoryPathInjectable
+    public abstract class SQLiteWebBrowserHistoryProvider : IWebBrowserHistoryProvider, IWebBrowserHistoryPath
     {
         public string HistoryFilePath { get; }
 
 
-        protected WebBrowserHistoryProvider(string historyFilePath)
+        protected SQLiteWebBrowserHistoryProvider(string historyFilePath)
         {
             if (string.IsNullOrEmpty(historyFilePath))
                 throw new ArgumentException($"{historyFilePath} is null or empty", nameof(historyFilePath));
@@ -60,13 +60,13 @@ namespace NF64.WebBrowser.Provider
         protected abstract SQLiteDataAdapter CreateDataAdapter(SQLiteConnection connection);
 
 
-        string IWebBrowserHistoryPathInjectable.InjectedHistoryFilePath { get; set; }
+        string IWebBrowserHistoryPath.InjectedHistoryFilePath { get; set; }
 
-        string IWebBrowserHistoryPathInjectable.GetEnsuredHistoryFilePath()
-            => (this as IWebBrowserHistoryPathInjectable).InjectedHistoryFilePath ?? this.HistoryFilePath;
+        string IWebBrowserHistoryPath.GetEnsuredHistoryFilePath()
+            => (this as IWebBrowserHistoryPath).InjectedHistoryFilePath ?? this.HistoryFilePath;
 
 
         private string GetEnsuredHistoryFilePath()
-            => (this as IWebBrowserHistoryPathInjectable).GetEnsuredHistoryFilePath();
+            => (this as IWebBrowserHistoryPath).GetEnsuredHistoryFilePath();
     }
 }

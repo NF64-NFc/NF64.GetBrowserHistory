@@ -13,7 +13,7 @@ namespace NF64
 
         private static void Main()
         {
-            var providers = new WebBrowserHistoryProvider[] {
+            var providers = new IWebBrowserHistoryProvider[] {
                     new ChromiumHistoryProvider(WebBrowserHistoryPath.ChromiumEdgePath),
                     new ChromiumHistoryProvider(WebBrowserHistoryPath.GoogleChromePath),
                 }.Concat(GetFireFoxProviders());
@@ -28,7 +28,7 @@ namespace NF64
         }
 
 
-        private static IEnumerable<WebBrowserHistoryProvider> GetFireFoxProviders()
+        private static IEnumerable<IWebBrowserHistoryProvider> GetFireFoxProviders()
         {
             var paths = WebBrowserHistoryPath.GetFirefoxHistoryFilePath();
             var ret = new List<FirefoxHistoryProvider>();
