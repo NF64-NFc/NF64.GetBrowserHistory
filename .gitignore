@@ -7,3 +7,6 @@ obj/
 
 # IDE - Visual Studio - NuGet packages
 /packages
+
+#Allow dll
+!*.dll
