@@ -2,9 +2,9 @@
 using System.Data;
 using System.Data.SQLite;
 
-namespace NF64.WebBrowser
+namespace NF64.WebBrowser.Provider
 {
-    public sealed class FirefoxHistoryProvider : ChromiumHistoryProvider
+    public sealed class FirefoxHistoryProvider : WebBrowserHistoryProvider
     {
         public FirefoxHistoryProvider(string historyFilePath) : base(historyFilePath) { }
 
@@ -15,6 +15,9 @@ namespace NF64.WebBrowser
                     Title = Convert.ToString(historyRow["title"]),
                     VisitedTime = this.UnixTimeToLocalTime(historyRow),
                 };
+
+        protected override SQLiteConnection CreateConnection(string hisotryFilePath)
+            => new SQLiteConnection($"Data Source={hisotryFilePath}; Version=3; New=False; Compress=True;");
 
         protected override SQLiteDataAdapter CreateDataAdapter(SQLiteConnection connection)
             => new SQLiteDataAdapter($"SELECT * FROM moz_places ORDER BY last_visit_date DESC", connection);

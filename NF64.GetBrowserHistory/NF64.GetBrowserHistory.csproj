@@ -36,15 +36,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="WebBrowser\ChromiumHistoryProvider.cs" />
-    <Compile Include="WebBrowser\FirefoxHistoryProvider.cs" />
+    <Compile Include="WebBrowser\Provider\ChromiumHistoryProvider.cs" />
+    <Compile Include="WebBrowser\Provider\FirefoxHistoryProvider.cs" />
     <Compile Include="WebBrowser\IWebBrowserHistoryPathInjectable.cs" />
-    <Compile Include="WebBrowser\IWebBroserHistoryProvider.cs" />
     <Compile Include="WebBrowser\WebBrowserHistory.cs" />
     <Compile Include="WebBrowser\WebBrowserHistoryLoader.cs" />
     <Compile Include="WebBrowser\WebBrowserHistoryPath.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebBrowser\Provider\WebBrowserHistoryProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

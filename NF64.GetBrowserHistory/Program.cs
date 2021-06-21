@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NF64.WebBrowser;
+using NF64.WebBrowser.Provider;
 
 namespace NF64
 {
@@ -12,7 +13,7 @@ namespace NF64
 
         private static void Main()
         {
-            var providers = new IWebBroserHistoryProvider[] {
+            var providers = new WebBrowserHistoryProvider[] {
                     new ChromiumHistoryProvider(WebBrowserHistoryPath.ChromiumEdgePath),
                     new ChromiumHistoryProvider(WebBrowserHistoryPath.GoogleChromePath),
                 }.Concat(GetFireFoxProviders());
@@ -27,7 +28,7 @@ namespace NF64
         }
 
 
-        private static IEnumerable<IWebBroserHistoryProvider> GetFireFoxProviders()
+        private static IEnumerable<WebBrowserHistoryProvider> GetFireFoxProviders()
         {
             var paths = WebBrowserHistoryPath.GetFirefoxHistoryFilePath();
             var ret = new List<FirefoxHistoryProvider>();

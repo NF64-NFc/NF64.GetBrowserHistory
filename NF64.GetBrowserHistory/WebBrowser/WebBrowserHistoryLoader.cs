@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using NF64.WebBrowser.Provider;
 
 namespace NF64.WebBrowser
 {
@@ -10,13 +11,13 @@ namespace NF64.WebBrowser
     {
         public string TemporaryDirectoryPath { get; }
 
-        public IEnumerable<IWebBroserHistoryProvider> Providers { get; }
+        public IEnumerable<WebBrowserHistoryProvider> Providers { get; }
 
 
         public int TimeoutMilliseconds { get; set; } = -1;
 
 
-        public WebBrowserHistoryLoader(string temporaryDirectoryPath, IEnumerable<IWebBroserHistoryProvider> providers)
+        public WebBrowserHistoryLoader(string temporaryDirectoryPath, IEnumerable<WebBrowserHistoryProvider> providers)
         {
             if (string.IsNullOrEmpty(temporaryDirectoryPath))
                 throw new ArgumentException($"{temporaryDirectoryPath} is null or empty", nameof(temporaryDirectoryPath));
@@ -49,7 +50,7 @@ namespace NF64.WebBrowser
             }
         }
 
-        private IEnumerable<WebBrowserHistory> LoadHistory(IWebBroserHistoryProvider provider)
+        private IEnumerable<WebBrowserHistory> LoadHistory(WebBrowserHistoryProvider provider)
         {
             var ret = new List<WebBrowserHistory>();
 
@@ -78,7 +79,7 @@ namespace NF64.WebBrowser
             return ret;
         }
 
-        private string CopyHistoryFile(IWebBroserHistoryProvider provider)
+        private string CopyHistoryFile(WebBrowserHistoryProvider provider)
         {
             this.EnsureDirectory(this.TemporaryDirectoryPath);
 

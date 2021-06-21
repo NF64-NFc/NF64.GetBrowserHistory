@@ -4,14 +4,14 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 
-namespace NF64.WebBrowser
+namespace NF64.WebBrowser.Provider
 {
-    public class ChromiumHistoryProvider : IWebBroserHistoryProvider, IWebBrowserHistoryPathInjectable
+    public abstract class WebBrowserHistoryProvider : IWebBrowserHistoryPathInjectable
     {
         public string HistoryFilePath { get; }
 
 
-        public ChromiumHistoryProvider(string historyFilePath)
+        protected WebBrowserHistoryProvider(string historyFilePath)
         {
             if (string.IsNullOrEmpty(historyFilePath))
                 throw new ArgumentException($"{historyFilePath} is null or empty", nameof(historyFilePath));
@@ -53,26 +53,11 @@ namespace NF64.WebBrowser
         }
 
 
-        protected virtual WebBrowserHistory GetHistoryItem(DataRow historyRow)
-            => new WebBrowserHistory() {
-                Url = Convert.ToString(historyRow["url"]),
-                Title = Convert.ToString(historyRow["title"]),
-                VisitedTime = this.UtcTimeToLocalTime(historyRow)
-            };
+        protected abstract WebBrowserHistory GetHistoryItem(DataRow historyRow);
 
-        protected virtual SQLiteConnection CreateConnection(string hisotryFilePath)
-            => new SQLiteConnection($"Data Source={hisotryFilePath}; Version=3; New=False; Compress=True;");
+        protected abstract SQLiteConnection CreateConnection(string hisotryFilePath);
 
-        protected virtual SQLiteDataAdapter CreateDataAdapter(SQLiteConnection connection)
-            => new SQLiteDataAdapter($"SELECT * FROM urls ORDER BY last_visit_time DESC", connection);
-
-
-        private DateTime UtcTimeToLocalTime(DataRow historyRow)
-        {
-            var utcMicroSeconds = Convert.ToInt64(historyRow["last_visit_time"]);
-            var gmtTime = DateTime.FromFileTimeUtc(utcMicroSeconds * 10);
-            return TimeZoneInfo.ConvertTimeFromUtc(gmtTime, TimeZoneInfo.Local);
-        }
+        protected abstract SQLiteDataAdapter CreateDataAdapter(SQLiteConnection connection);
 
 
         string IWebBrowserHistoryPathInjectable.InjectedHistoryFilePath { get; set; }
